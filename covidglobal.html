@@ -1,0 +1,82 @@
+<!doctypehtml>
+<html>
+<head> 
+<title> 
+Covid-19 UPDATES
+</title>
+<style>
+.tst{text-align:center;}
+body {
+  background-image: url("covid191.jpg");
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
+}
+
+.ist{text-align:center;font-family:candara;}
+h1{font-size:40px}
+</style>
+</head>
+</body>
+<h1 class="ist" style='color:#FF00FF'> BHARAT COVID-19 UPDATES </h1>
+<table style="float:left; margin-top:80px; margin-left:50px; margin-right:65px; font-family: candara" border="0px" cellspacing="0" cellpadding="8px">    
+<tr>
+<td class="ist" colspan="8"><h1 style='color:#00FFFF;'>Countries Data</h1></td>
+
+<tr style='color:#00FFFF;'>
+<th class="tst">S.No.</th>
+<th class="tst">Country</th>
+<th class="tst">TotalConfirmed</th>
+<th class="tst">TotalDeaths</th>
+<th class="tst">TotalRecovered</th>
+
+
+
+</tr>
+</tr>
+<tbody id="country-wise"></tbody>
+</table>
+<table  style="float:left;margin-top:80px;font-family: candara" width="500px" border="0px" cellspacing="0" cellpadding="8px">    
+<tr>
+<td class="ist" colspan="2" ><h1 style='color:#00FFFF;'>Global Data</h1></td>
+</tr>
+<tbody id="global-wise"></tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$.ajax	({ 
+			url : "https://api.covid19api.com/summary",
+			type: "GET",
+			datatype: "JSON",
+			success : function(data){
+				console.log(data);
+				console.log(data.Countries);
+				
+				$.each(data.Global,function(key,value){
+				$("#global-wise").append("<tr style='color:yellow'><td style='color:yellow'>" + key + "</td><td>" + value + "</td></tr>")
+				
+				});
+				
+				var sno = 1;
+				$.each(data.Countries,function(key,value){
+				$("#country-wise").append("<tr>" + 
+										"<td style='color:yellow;'>" + sno + "</td>" +
+										"<td class='tst' style='color:yellow;'>" + value.Country + "</td>" +
+										"<td class='tst' style='color:yellow;'>" + value.TotalConfirmed + "</td>" +
+										"<td class='tst' style='color:yellow;'>" + value.TotalDeaths + "</td>" +
+										"<td class='tst' style='color:yellow;'>" + value.TotalRecovered + "</td>" +
+										
+										"</tr>");
+				sno++;
+				});
+			}
+	
+		
+})
+
+
+
+</script>
+</body>
+</html>
